@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button class="btn-input" onClick="enterUrl()">Введите адрес</button>
+<button class="btn-edit" onClick="redirectToHttps()">Перейдите на этот адрес</button>
+
+<script>
+    var enteredUrl = '';
+    function enterUrl() {
+        enteredUrl = prompt('Введите адрес')
+    }
+    function redirectToHttps () {
+        if (!(/\./.test(enteredUrl))) {
+            alert('Введите валидный адрес')
+            return;
+        }
+        if (enteredUrl === '' || enteredUrl === null) {
+            alert('Введите адрес')
+            return;
+        }
+        if (/^http:/i.test(enteredUrl)) {
+            alert('Данный сайт не рекомендуется для посещения')
+            return;
+        }
+        if (/^https:/i.test(enteredUrl)) {
+            return window.location.href = enteredUrl;
+        }
+        return window.location.href = `https://${enteredUrl}`;
+    }
+</script>
+</body>
+</html>
